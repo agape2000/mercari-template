@@ -292,11 +292,11 @@
             display: inline-block;
         }
 
-        /* My定型文エリア */
+        /* My定型文エリアUI強化 */
         .my-template-area {
             display: flex;
             gap: 8px;
-            margin-top: 8px;
+            margin-bottom: 12px;
         }
 
         .btn-save {
@@ -312,31 +312,55 @@
         }
 
         .saved-list {
-            margin-top: 10px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .saved-chip {
-            background: #f3f4f6;
-            border: 1px solid #d1d5db;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .saved-item {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 10px 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .saved-text {
+            font-size: 0.85rem;
+            color: #374151;
+            word-break: break-all;
+        }
+
+        .saved-actions {
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .btn-mini-copy {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
             cursor: pointer;
         }
 
-        .saved-chip .del-btn {
-            color: #9ca3af;
+        .btn-mini-del {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: bold;
-        }
-
-        .saved-chip .del-btn:hover {
-            color: var(--primary-color);
+            cursor: pointer;
         }
 
         /* SEO記事コンテンツ */
@@ -383,7 +407,7 @@
 
 <div class="container">
 
-    <!-- 改良版：スマホ別アプリ追加案内 -->
+    <!-- スマホ別アプリ追加案内 -->
     <div class="pwa-banner">
         <div class="pwa-banner-title">📱 スマホのホーム画面に追加してアプリ化！</div>
         <div class="pwa-steps">
@@ -446,17 +470,6 @@
         </div>
     </div>
 
-    <!-- 新機能：My定型文保存（LocalStorage） -->
-    <div class="card">
-        <div class="card-title">⭐ My定型文（よく使うフレーズを保存）</div>
-        <p style="font-size:0.8rem; color:#6b7280;">自分専用の文章（例：「〇〇駅付近で手渡しもOK」など）を保存できます。</p>
-        <div class="my-template-area">
-            <input type="text" id="customPhrase" placeholder="例：おまけでステッカーを同封します！">
-            <button class="btn-save" onclick="saveCustomPhrase()">保存</button>
-        </div>
-        <div id="savedList" class="saved-list"></div>
-    </div>
-
     <!-- Step 4: プレビュー＆コピペ＆文字数カウンター -->
     <div class="card">
         <div class="card-title">
@@ -476,6 +489,17 @@
             <span class="sub-tool-btn" onclick="copyReply('declineKeep')">📌 取り置き（専用）を断る</span>
             <span class="sub-tool-btn" onclick="copyReply('thanksPurchase')">🌸 購入後のお礼メッセージ</span>
         </div>
+    </div>
+
+    <!-- 新機能：My定型文保存（下部に移動＆ワンタップコピー化） -->
+    <div class="card">
+        <div class="card-title">⭐ My定型文（よく使うフレーズを保存）</div>
+        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:10px;">自分専用の文章を保存しておけます。「コピー」ボタンでいつでもワンタップコピペ可能です！</p>
+        <div class="my-template-area">
+            <input type="text" id="customPhrase" placeholder="例：〇〇駅付近での手渡しも可能です！">
+            <button class="btn-save" onclick="saveCustomPhrase()">保存</button>
+        </div>
+        <div id="savedList" class="saved-list"></div>
     </div>
 
     <!-- Step 5: SNSで共有 -->
@@ -508,7 +532,7 @@
 
 <script>
     let currentCategory = 'fashion';
-    let savedPhrases = JSON.parse(localStorage.getItem('my_mercari_phrases') || '[]');
+    let savedPhrases = [];
 
     const placeholders = {
         fashion: {
@@ -534,6 +558,17 @@
         declineKeep: "コメントありがとうございます！トラブル防止のため、メルカリのルールに則りお取り置き（専用出品）はお断りさせていただいております。申し訳ございません。即購入は歓迎しておりますので、ご都合の良いタイミングでご購入くださいませ。",
         thanksPurchase: "ご購入いただき誠にありがとうございます！お取引完了まで迅速・丁寧な対応を心がけます。発送が完了いたしましたら改めてご連絡させていただきますので、今しばらくお待ちくださいませ。"
     };
+
+    // 初期化時にLocalStorageからデータを確実に取得
+    function loadSavedPhrases() {
+        try {
+            const data = localStorage.getItem('my_mercari_phrases');
+            savedPhrases = data ? JSON.parse(data) : [];
+        } catch (e) {
+            savedPhrases = [];
+        }
+        renderSavedPhrases();
+    }
 
     function setCategory(cat) {
         currentCategory = cat;
@@ -581,11 +616,6 @@
         if (optDiscount) text += `・他出品物とのまとめ買いでお値引き可能です\n`;
         if (optNoDiscount) text += `・送料込み限界価格のため、お値下げ交渉はご遠慮ください\n`;
 
-        // カスタム選択フレーズの追加
-        document.querySelectorAll('.saved-chip.selected').forEach(chip => {
-            text += `・${chip.dataset.phrase}\n`;
-        });
-
         text += `\n気になる点がありましたら、お気軽にコメントください！\nよろしくお願いいたします。`;
 
         const textarea = document.getElementById('resultText');
@@ -601,7 +631,7 @@
         }
     }
 
-    /* LocalStorage 保存処理 */
+    /* LocalStorage 保存＆表示処理 */
     function saveCustomPhrase() {
         const input = document.getElementById('customPhrase');
         const val = input.value.trim();
@@ -611,34 +641,50 @@
         localStorage.setItem('my_mercari_phrases', JSON.stringify(savedPhrases));
         input.value = '';
         renderSavedPhrases();
-        generateText();
         showToast('My定型文に保存しました！');
     }
 
-    function deleteCustomPhrase(index, e) {
-        e.stopPropagation();
+    function deleteCustomPhrase(index) {
         savedPhrases.splice(index, 1);
         localStorage.setItem('my_mercari_phrases', JSON.stringify(savedPhrases));
         renderSavedPhrases();
-        generateText();
+        showToast('削除しました');
     }
 
-    function toggleCustomPhrase(el) {
-        el.classList.toggle('selected');
-        generateText();
+    function copyCustomPhrase(text) {
+        navigator.clipboard.writeText(text);
+        showToast('定型文をコピーしました！');
     }
 
     function renderSavedPhrases() {
         const container = document.getElementById('savedList');
         container.innerHTML = '';
+
+        if (savedPhrases.length === 0) {
+            container.innerHTML = '<p style="font-size:0.8rem; color:#9ca3af; text-align:center; padding:8px;">保存された定型文はありません</p>';
+            return;
+        }
+
         savedPhrases.forEach((phrase, i) => {
-            const chip = document.createElement('div');
-            chip.className = 'saved-chip';
-            chip.dataset.phrase = phrase;
-            chip.onclick = () => toggleCustomPhrase(chip);
-            chip.innerHTML = `<span>+ ${phrase}</span><span class="del-btn" onclick="deleteCustomPhrase(${i}, event)">×</span>`;
-            container.appendChild(chip);
+            const item = document.createElement('div');
+            item.className = 'saved-item';
+            item.innerHTML = `
+                <span class="saved-text">${escapeHtml(phrase)}</span>
+                <div class="saved-actions">
+                    <button class="btn-mini-copy" onclick="copyCustomPhrase('${escapeJs(phrase)}')">コピー</button>
+                    <button class="btn-mini-del" onclick="deleteCustomPhrase(${i})">削除</button>
+                </div>
+            `;
+            container.appendChild(item);
         });
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function escapeJs(str) {
+        return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
     }
 
     function copyResult() {
@@ -694,9 +740,15 @@
         showToast('サイトURLをコピーしました！インスタ等に貼ってね👍');
     }
 
-    // 初期化
-    setCategory('fashion');
-    renderSavedPhrases();
+    // 初期起動およびブラウザバック対応
+    window.addEventListener('DOMContentLoaded', () => {
+        setCategory('fashion');
+        loadSavedPhrases();
+    });
+
+    window.addEventListener('pageshow', (event) => {
+        loadSavedPhrases();
+    });
 </script>
 
 </body>
