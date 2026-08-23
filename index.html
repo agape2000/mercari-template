@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <!-- SEO対策 -->
     <title>【無料】メルカリ出品文自動作成ツール - 文字数カウント＆定型文コピペで即出品！</title>
     <meta name="description" content="メルカリ・ラクマ・PayPayフリマ用の商品説明文をポチポチ選ぶだけで自動作成！1000文字制限メーター、値下げ断り文生成、ジャンル別テンプレート、ワンタップコピペ機能搭載。">
     <meta name="keywords" content="メルカリ,出品,テンプレート,商品説明文,自動作成,文字数カウント,フリマ,定型文,コピペ,メルカリ出品ツール">
+
+    <!-- OGP設定（SNSでシェアされた時の見栄え向上） -->
+    <meta property="og:title" content="【無料】メルカリ出品文自動作成ツール - コピペで即出品！">
+    <meta property="og:description" content="選ぶだけで「売れる」商品説明文が10秒で完成！文字数カウンター＆コメント返信テンプレートも搭載。">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="メルカリ出品文自動作成ツール">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Webアプリ化（PWA設定） -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="メルカリ出品ツール">
 
     <style>
         :root {
@@ -29,7 +42,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.5;
+            line-height: 1.6;
             padding: 16px;
             max-width: 800px;
             margin: 0 auto;
@@ -171,7 +184,6 @@
             background: #f3f4f6;
         }
 
-        /* 文字数メーター */
         .char-counter {
             font-size: 0.8rem;
             font-weight: bold;
@@ -207,7 +219,6 @@
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
         }
 
-        /* SNS共有ボタン */
         .share-btns {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -234,7 +245,6 @@
         .share-threads { background-color: #101010; }
         .share-insta { background-color: #E1306C; }
 
-        /* ミニツール用（返信文生成） */
         .sub-tool-btn {
             background: #eef2ff;
             color: #4f46e5;
@@ -247,6 +257,36 @@
             margin-right: 6px;
             margin-bottom: 6px;
             display: inline-block;
+        }
+
+        /* SEO記事コンテンツ装飾 */
+        .seo-content {
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+
+        .seo-content h2 {
+            font-size: 0.95rem;
+            color: #111827;
+            margin: 12px 0 6px 0;
+        }
+
+        .seo-content ul {
+            padding-left: 18px;
+            margin-bottom: 8px;
+        }
+
+        /* アプリ追加通知バナー */
+        .pwa-banner {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 0.8rem;
+            color: #1e40af;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .toast {
@@ -269,12 +309,17 @@
 <body>
 
 <header>
-    <span class="logo-badge">PRO EDITION 100</span>
+    <span class="logo-badge">ULTIMATE EDITION 100</span>
     <h1>メルカリ出品文 自動作成ツール</h1>
     <p class="subtitle">選ぶだけで「売れる」商品説明文が10秒で即完成！</p>
 </header>
 
 <div class="container">
+
+    <!-- PWAアプリ追加バナー -->
+    <div class="pwa-banner">
+        <span>📱 ブラウザの「ホーム画面に追加」をタップすると、アプリとしてサクサク使えます！</span>
+    </div>
 
     <!-- Step 1: カテゴリ選択 -->
     <div class="card">
@@ -340,10 +385,10 @@
         <button id="copyBtn" class="btn-copy" onclick="copyResult()">📋 商品説明文をコピーする</button>
     </div>
 
-    <!-- 神機能：コメント返信（お断り）ジェネレーター -->
+    <!-- 即レス用：コメント返信（お断り）ジェネレーター -->
     <div class="card">
         <div class="card-title">💬 困ったときのコメント返信テンプレート</div>
-        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:10px;">タップすると返信文がコピーされます。メルカリのコメント返信に貼り付けて使ってください！</p>
+        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:10px;">タップすると返信文がコピーされます。メルカリのコメント欄に貼り付けて使ってください！</p>
         <div>
             <span class="sub-tool-btn" onclick="copyReply('declineDiscount')">🙅‍♂️ 大幅な値下げ要求を断る</span>
             <span class="sub-tool-btn" onclick="copyReply('declineKeep')">📌 取り置き（専用）を断る</span>
@@ -360,6 +405,19 @@
             <button class="share-btn share-threads" onclick="shareThreads()">Threads で共有</button>
             <button class="share-btn share-insta" onclick="copySiteUrl()">Instagram (URLコピー)</button>
         </div>
+    </div>
+
+    <!-- SEO対策用ノウハウコンテンツ -->
+    <div class="card seo-content">
+        <div class="card-title">💡 メルカリで商品が即売れするノウハウガイド</div>
+        <h2>1. 検索されやすいキーワードをタイトルに含める</h2>
+        <p>「ブランド名」「型番」「サイズ」「色」「状態」をタイトルの最初に入れると、メルカリ内の検索にヒットしやすくなります。</p>
+        
+        <h2>2. 「即購入OK」「匿名配送」を明記する</h2>
+        <p>購入検討者が最も気にするのは「安全・スムーズに取引できるか」です。テンプレートの定型文オプションを活用して安心感をアピールしましょう。</p>
+        
+        <h2>3. 発送までのスピードをアピールする</h2>
+        <p>「24時間以内発送」のバッチが付いている商品や、説明文にスピード発送の旨が書かれている商品は売れ行きが圧倒的に高くなります。</p>
     </div>
 
 </div>
@@ -445,7 +503,6 @@
         const textarea = document.getElementById('resultText');
         textarea.value = text;
 
-        // 文字数計算
         const len = text.length;
         const counter = document.getElementById('charCounter');
         counter.innerText = `${len} / 1000文字`;
