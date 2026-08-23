@@ -6,12 +6,12 @@
     
     <!-- SEO対策 -->
     <title>【無料】メルカリ出品文自動作成ツール - 文字数カウント＆定型文コピペで即出品！</title>
-    <meta name="description" content="メルカリ・ラクマ・PayPayフリマ用の商品説明文をポチポチ選ぶだけで自動作成！1000文字制限メーター、値下げ断り文生成、ジャンル別テンプレート、ワンタップコピペ機能搭載。">
+    <meta name="description" content="メルカリ・ラクマ・PayPayフリマ用の商品説明文をポチポチ選ぶだけで自動作成！1000文字制限メーター、マイ定型文保存、値下げ断り文生成、ジャンル別テンプレート、ワンタップコピペ機能搭載。">
     <meta name="keywords" content="メルカリ,出品,テンプレート,商品説明文,自動作成,文字数カウント,フリマ,定型文,コピペ,メルカリ出品ツール">
 
-    <!-- OGP設定（SNSでシェアされた時の見栄え向上） -->
+    <!-- OGP設定（SNS共有時の見栄え） -->
     <meta property="og:title" content="【無料】メルカリ出品文自動作成ツール - コピペで即出品！">
-    <meta property="og:description" content="選ぶだけで「売れる」商品説明文が10秒で完成！文字数カウンター＆コメント返信テンプレートも搭載。">
+    <meta property="og:description" content="選ぶだけで「売れる」商品説明文が10秒で完成！My定型文保存機能＆文字数カウンター搭載。">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="メルカリ出品文自動作成ツール">
     <meta name="twitter:card" content="summary_large_image">
@@ -50,7 +50,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .logo-badge {
@@ -98,6 +98,39 @@
             justify-content: space-between;
             border-bottom: 2px solid var(--bg-color);
             padding-bottom: 8px;
+        }
+
+        /* アプリ追加案内（iOS/Android別） */
+        .pwa-banner {
+            background: #ffffff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 0.8rem;
+            color: #1e3a8a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .pwa-banner-title {
+            font-weight: bold;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #1d4ed8;
+        }
+
+        .pwa-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            line-height: 1.4;
+        }
+
+        .pwa-step-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .form-group {
@@ -259,7 +292,54 @@
             display: inline-block;
         }
 
-        /* SEO記事コンテンツ装飾 */
+        /* My定型文エリア */
+        .my-template-area {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .btn-save {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .saved-list {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .saved-chip {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .saved-chip .del-btn {
+            color: #9ca3af;
+            font-weight: bold;
+        }
+
+        .saved-chip .del-btn:hover {
+            color: var(--primary-color);
+        }
+
+        /* SEO記事コンテンツ */
         .seo-content {
             font-size: 0.85rem;
             color: #4b5563;
@@ -274,19 +354,6 @@
         .seo-content ul {
             padding-left: 18px;
             margin-bottom: 8px;
-        }
-
-        /* アプリ追加通知バナー */
-        .pwa-banner {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 0.8rem;
-            color: #1e40af;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
         .toast {
@@ -309,16 +376,20 @@
 <body>
 
 <header>
-    <span class="logo-badge">ULTIMATE EDITION 100</span>
+    <span class="logo-badge">PRO MAX 100</span>
     <h1>メルカリ出品文 自動作成ツール</h1>
     <p class="subtitle">選ぶだけで「売れる」商品説明文が10秒で即完成！</p>
 </header>
 
 <div class="container">
 
-    <!-- PWAアプリ追加バナー -->
+    <!-- 改良版：スマホ別アプリ追加案内 -->
     <div class="pwa-banner">
-        <span>📱 ブラウザの「ホーム画面に追加」をタップすると、アプリとしてサクサク使えます！</span>
+        <div class="pwa-banner-title">📱 スマホのホーム画面に追加してアプリ化！</div>
+        <div class="pwa-steps">
+            <div class="pwa-step-item"><b>iPhone (Safari):</b> 画面下の <b>[⎋ (共有ボタン)]</b> ➔ <b>[ホーム画面に追加]</b></div>
+            <div class="pwa-step-item"><b>Android (Chrome):</b> 右上の <b>[⋮ (メニュー)]</b> ➔ <b>[ホーム画面に追加]</b></div>
+        </div>
     </div>
 
     <!-- Step 1: カテゴリ選択 -->
@@ -375,6 +446,17 @@
         </div>
     </div>
 
+    <!-- 新機能：My定型文保存（LocalStorage） -->
+    <div class="card">
+        <div class="card-title">⭐ My定型文（よく使うフレーズを保存）</div>
+        <p style="font-size:0.8rem; color:#6b7280;">自分専用の文章（例：「〇〇駅付近で手渡しもOK」など）を保存できます。</p>
+        <div class="my-template-area">
+            <input type="text" id="customPhrase" placeholder="例：おまけでステッカーを同封します！">
+            <button class="btn-save" onclick="saveCustomPhrase()">保存</button>
+        </div>
+        <div id="savedList" class="saved-list"></div>
+    </div>
+
     <!-- Step 4: プレビュー＆コピペ＆文字数カウンター -->
     <div class="card">
         <div class="card-title">
@@ -426,6 +508,7 @@
 
 <script>
     let currentCategory = 'fashion';
+    let savedPhrases = JSON.parse(localStorage.getItem('my_mercari_phrases') || '[]');
 
     const placeholders = {
         fashion: {
@@ -498,6 +581,11 @@
         if (optDiscount) text += `・他出品物とのまとめ買いでお値引き可能です\n`;
         if (optNoDiscount) text += `・送料込み限界価格のため、お値下げ交渉はご遠慮ください\n`;
 
+        // カスタム選択フレーズの追加
+        document.querySelectorAll('.saved-chip.selected').forEach(chip => {
+            text += `・${chip.dataset.phrase}\n`;
+        });
+
         text += `\n気になる点がありましたら、お気軽にコメントください！\nよろしくお願いいたします。`;
 
         const textarea = document.getElementById('resultText');
@@ -511,6 +599,46 @@
         } else {
             counter.classList.remove('danger');
         }
+    }
+
+    /* LocalStorage 保存処理 */
+    function saveCustomPhrase() {
+        const input = document.getElementById('customPhrase');
+        const val = input.value.trim();
+        if (!val) return;
+
+        savedPhrases.push(val);
+        localStorage.setItem('my_mercari_phrases', JSON.stringify(savedPhrases));
+        input.value = '';
+        renderSavedPhrases();
+        generateText();
+        showToast('My定型文に保存しました！');
+    }
+
+    function deleteCustomPhrase(index, e) {
+        e.stopPropagation();
+        savedPhrases.splice(index, 1);
+        localStorage.setItem('my_mercari_phrases', JSON.stringify(savedPhrases));
+        renderSavedPhrases();
+        generateText();
+    }
+
+    function toggleCustomPhrase(el) {
+        el.classList.toggle('selected');
+        generateText();
+    }
+
+    function renderSavedPhrases() {
+        const container = document.getElementById('savedList');
+        container.innerHTML = '';
+        savedPhrases.forEach((phrase, i) => {
+            const chip = document.createElement('div');
+            chip.className = 'saved-chip';
+            chip.dataset.phrase = phrase;
+            chip.onclick = () => toggleCustomPhrase(chip);
+            chip.innerHTML = `<span>+ ${phrase}</span><span class="del-btn" onclick="deleteCustomPhrase(${i}, event)">×</span>`;
+            container.appendChild(chip);
+        });
     }
 
     function copyResult() {
@@ -568,6 +696,7 @@
 
     // 初期化
     setCategory('fashion');
+    renderSavedPhrases();
 </script>
 
 </body>
