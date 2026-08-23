@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO対策：検索されやすい「メルカリ 出品 テンプレート ツール」を網羅 -->
+    <title>【無料】メルカリ出品文自動作成ツール - コピペで即出品！テンプレート・商品説明文生成</title>
+    <meta name="description" content="メルカリ・ラクマ・PayPayフリマ用の商品説明文をポチポチ選ぶだけで自動作成！服、家電、コスメなどジャンル別の定型文とサイズ、発送方法をワンタップで綺麗に整形＆コピペできます。">
+    <meta name="keywords" content="メルカリ,出品,テンプレート,商品説明文,自動作成,ツール,フリマ,定型文,コピペ,メルカリ出品ツール">
+
+    <style>
+        :root {
+            --primary-color: #ff0038; /* メルカリ風のレッド */
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+        }
+
+        p.subtitle {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 6px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #444;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            background-color: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 180px;
+            font-size: 0.9rem;
+        }
+
+        .category-btns, .option-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn-chip {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-chip.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .checkbox-label {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .btn-copy {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-copy:active {
+            opacity: 0.8;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>メルカリ出品文 自動作成ツール</h1>
+    <p class="subtitle">項目を選ぶだけで、売れやすい商品説明文がすぐ完成！</p>
+</header>
+
+<div class="container">
+
+    <!-- Step 1: カテゴリ選択 -->
+    <div class="card">
+        <div class="card-title">1. ジャンルを選択</div>
+        <div class="category-btns">
+            <button class="btn-chip active" onclick="setCategory('fashion')">👕 服・ファッション</button>
+            <button class="btn-chip" onclick="setCategory('gadget')">📱 家電・ゲーム・スマホ</button>
+            <button class="btn-chip" onclick="setCategory('beauty')">💄 コスメ・美容</button>
+            <button class="btn-chip" onclick="setCategory('other')">📦 その他・雑貨</button>
+        </div>
+    </div>
+
+    <!-- Step 2: 商品詳細の入力 -->
+    <div class="card">
+        <div class="card-title">2. 商品の詳細を入れる</div>
+        
+        <div class="form-group">
+            <label>商品名 / ブランド名</label>
+            <input type="text" id="itemName" placeholder="例：ユニクロ パフテックパーカー / NIKE スニーカー" oninput="generateText()">
+        </div>
+
+        <div class="form-group">
+            <label>商品の状態</label>
+            <select id="itemCondition" onchange="generateText()">
+                <option value="新品、未使用">✨ 新品、未使用</option>
+                <option value="未使用に近い">👌 未使用に近い（数回着用/使用）</option>
+                <option value="目立った傷や汚れなし" selected>👍 目立った傷や汚れなし</option>
+                <option value="やや傷や汚れあり">⚠️ やや傷や汚れあり（写真参照）</option>
+            </select>
+        </div>
+
+        <!-- ファッション用詳細（動的表示） -->
+        <div id="fashionFields" class="form-group">
+            <label>サイズ / カラー</label>
+            <input type="text" id="itemSizeColor" placeholder="例：Lサイズ / ブラック" oninput="generateText()">
+        </div>
+
+        <div class="form-group">
+            <label>アピールポイント・補足説明</label>
+            <input type="text" id="itemMemo" placeholder="例：去年の冬に購入。着心地がよく保温性抜群です。" oninput="generateText()">
+        </div>
+    </div>
+
+    <!-- Step 3: 安心取引のオプション -->
+    <div class="card">
+        <div class="card-title">3. 定型文オプション（選ぶだけ）</div>
+        <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" id="optSmoke" checked onchange="generateText()"> 喫煙者なし</label>
+            <label class="checkbox-label"><input type="checkbox" id="optPet" checked onchange="generateText()"> ペットなし</label>
+            <label class="checkbox-label"><input type="checkbox" id="optImmediate" checked onchange="generateText()"> 即購入OK</label>
+            <label class="checkbox-label"><input type="checkbox" id="optShipping" checked onchange="generateText()"> 匿名配送・24時間以内発送</label>
+            <label class="checkbox-label"><input type="checkbox" id="optDiscount" onchange="generateText()"> まとめ買いでお値引き</label>
+        </div>
+    </div>
+
+    <!-- Step 4: プレビュー＆コピペ -->
+    <div class="card">
+        <div class="card-title">4. 完成した商品説明文（リアルタイム表示）</div>
+        <textarea id="resultText" readonly></textarea>
+        <button class="btn-copy" onclick="copyResult()">📋 商品説明文をコピーする</button>
+    </div>
+
+</div>
+
+<div id="toast" class="toast">コピーしました！メルカリに貼り付けてね👍</div>
+
+<script>
+    let currentCategory = 'fashion';
+
+    function setCategory(cat) {
+        currentCategory = cat;
+        document.querySelectorAll('.category-btns .btn-chip').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // ジャンルによって入力欄を一部切り替え
+        const fashionFields = document.getElementById('fashionFields');
+        if (cat === 'fashion') {
+            fashionFields.style.display = 'block';
+        } else {
+            fashionFields.style.display = 'none';
+        }
+
+        generateText();
+    }
+
+    function generateText() {
+        const name = document.getElementById('itemName').value || '【商品名を入力してください】';
+        const condition = document.getElementById('itemCondition').value;
+        const sizeColor = document.getElementById('itemSizeColor').value;
+        const memo = document.getElementById('itemMemo').value;
+
+        const optSmoke = document.getElementById('optSmoke').checked;
+        const optPet = document.getElementById('optPet').checked;
+        const optImmediate = document.getElementById('optImmediate').checked;
+        const optShipping = document.getElementById('optShipping').checked;
+        const optDiscount = document.getElementById('optDiscount').checked;
+
+        let text = `ご覧いただきありがとうございます！\n即購入大歓迎です✨\n\n`;
+        text += `【商品名】\n${name}\n\n`;
+
+        if (currentCategory === 'fashion' && sizeColor) {
+            text += `【サイズ・カラー】\n${sizeColor}\n\n`;
+        }
+
+        text += `【商品の状態】\n${condition}\n`;
+        if (memo) {
+            text += `${memo}\n`;
+        }
+        text += `\n`;
+
+        text += `【その他・安心ポイント】\n`;
+        if (optImmediate) text += `・コメントなしの即購入OKです！\n`;
+        if (optSmoke) text += `・タバコは吸いません（非喫煙環境）\n`;
+        if (optPet) text += `・ペットは飼っておりません\n`;
+        if (optShipping) text += `・安心の匿名配送で、24時間以内に発送いたします\n`;
+        if (optDiscount) text += `・他の出品物とのおまとめ買いでお値引き可能です\n`;
+
+        text += `\n気になる点がありましたら、お気軽にコメントください！\nよろしくお願いいたします。`;
+
+        document.getElementById('resultText').value = text;
+    }
+
+    function copyResult() {
+        const resultText = document.getElementById('resultText');
+        resultText.select();
+        document.execCommand('copy');
+
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2000);
+    }
+
+    // 初期生成
+    generateText();
+</script>
+
+</body>
+</html>
