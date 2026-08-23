@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <!-- Google tag (gtag.js) GA4解析タグ -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-00VYT5ZG0B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-00VYT5ZG0B');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -227,7 +237,6 @@
             background: #f3f4f6;
         }
 
-        /* My定型文追加エリア（3-2用） */
         .my-option-input-group {
             display: flex;
             gap: 8px;
@@ -524,7 +533,6 @@
 
 <script>
     let currentCategory = 'fashion';
-    // 各オブジェクト: { text: '文章', checked: true/false }
     let customOptions = [];
 
     const placeholders = {
@@ -552,7 +560,6 @@
         thanksPurchase: "ご購入いただき誠にありがとうございます！お取引完了まで迅速・丁寧な対応を心がけます。発送が完了いたしましたら改めてご連絡させていただきますので、今しばらくお待ちくださいませ。"
     };
 
-    /* LocalStorage から保存済みカスタムオプションを取得 */
     function loadCustomOptions() {
         try {
             const data = localStorage.getItem('my_mercari_custom_options');
@@ -613,7 +620,6 @@
         if (optDiscount) text += `・他出品物とのまとめ買いでお値引き可能です\n`;
         if (optNoDiscount) text += `・送料込み限界価格のため、お値下げ交渉はご遠慮ください\n`;
 
-        // My定型文（チェックされているものを反映）
         customOptions.forEach(opt => {
             if (opt.checked) {
                 text += `・${opt.text}\n`;
@@ -635,7 +641,6 @@
         }
     }
 
-    /* My定型文（3-2）の操作処理 */
     function addCustomOption() {
         const input = document.getElementById('customOptionInput');
         const val = input.value.trim();
@@ -722,7 +727,6 @@
         setTimeout(() => { toast.style.display = 'none'; }, 2000);
     }
 
-    /* SNS共有機能 */
     const shareTitle = "メルカリ出品文自動作成ツール | ポチポチ選ぶだけで出品文が完成！";
     const shareUrl = window.location.href;
 
@@ -746,7 +750,6 @@
         showToast('サイトURLをコピーしました！インスタ等に貼ってね👍');
     }
 
-    // 初期起動およびブラウザバック対応
     window.addEventListener('DOMContentLoaded', () => {
         setCategory('fashion');
         loadCustomOptions();
