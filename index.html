@@ -9,7 +9,7 @@
     <meta name="description" content="メルカリ・ラクマ・PayPayフリマ用の商品説明文をポチポチ選ぶだけで自動作成！1000文字制限メーター、マイ定型文保存、値下げ断り文生成、ジャンル別テンプレート、ワンタップコピペ機能搭載。">
     <meta name="keywords" content="メルカリ,出品,テンプレート,商品説明文,自動作成,文字数カウント,フリマ,定型文,コピペ,メルカリ出品ツール">
 
-    <!-- OGP設定（SNS共有時の見栄え） -->
+    <!-- OGP設定 -->
     <meta property="og:title" content="【無料】メルカリ出品文自動作成ツール - コピペで即出品！">
     <meta property="og:description" content="選ぶだけで「売れる」商品説明文が10秒で完成！My定型文保存機能＆文字数カウンター搭載。">
     <meta property="og:type" content="website">
@@ -100,7 +100,6 @@
             padding-bottom: 8px;
         }
 
-        /* アプリ追加案内（iOS/Android別） */
         .pwa-banner {
             background: #ffffff;
             border: 1px solid #bfdbfe;
@@ -195,6 +194,16 @@
             box-shadow: 0 2px 8px rgba(255, 0, 56, 0.15);
         }
 
+        .section-subtitle {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #4b5563;
+            margin: 12px 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .checkbox-group {
             display: flex;
             flex-direction: column;
@@ -207,14 +216,67 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            padding: 8px;
+            padding: 8px 10px;
             border-radius: 8px;
             background: #f9fafb;
             transition: background 0.2s;
+            border: 1px solid transparent;
         }
 
         .checkbox-label:hover {
             background: #f3f4f6;
+        }
+
+        /* My定型文追加エリア（3-2用） */
+        .my-option-input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .btn-add-option {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .btn-add-option:hover {
+            background-color: #2563eb;
+        }
+
+        .my-option-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+
+        .my-option-item .checkbox-label {
+            background: transparent;
+            padding: 0;
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .btn-del-mini {
+            background: transparent;
+            color: #ef4444;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 6px;
+            line-height: 1;
         }
 
         .char-counter {
@@ -292,78 +354,6 @@
             display: inline-block;
         }
 
-        /* My定型文エリアUI強化 */
-        .my-template-area {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .btn-save {
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .saved-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .saved-item {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            padding: 10px 12px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .saved-text {
-            font-size: 0.85rem;
-            color: #374151;
-            word-break: break-all;
-        }
-
-        .saved-actions {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-
-        .btn-mini-copy {
-            background: #10b981;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .btn-mini-del {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* SEO記事コンテンツ */
         .seo-content {
             font-size: 0.85rem;
             color: #4b5563;
@@ -373,11 +363,6 @@
             font-size: 0.95rem;
             color: #111827;
             margin: 12px 0 6px 0;
-        }
-
-        .seo-content ul {
-            padding-left: 18px;
-            margin-bottom: 8px;
         }
 
         .toast {
@@ -457,9 +442,12 @@
         </div>
     </div>
 
-    <!-- Step 3: 定型文オプション -->
+    <!-- Step 3: 定型文オプション（標準＋カスタム追加） -->
     <div class="card">
         <div class="card-title">3. 定型文オプション（選ぶだけ）</div>
+        
+        <!-- 3-1: 標準オプション -->
+        <div class="section-subtitle">📌 定番オプション（チェックで本文に追加）</div>
         <div class="checkbox-group">
             <label class="checkbox-label"><input type="checkbox" id="optImmediate" checked onchange="generateText()"> 🚀 コメントなし即購入OK（早い者勝ち）</label>
             <label class="checkbox-label"><input type="checkbox" id="optSmokePet" checked onchange="generateText()"> 🚭 喫煙者なし・ペットなし</label>
@@ -467,6 +455,21 @@
             <label class="checkbox-label"><input type="checkbox" id="optSpeed" onchange="generateText()"> ⚡ 24時間以内スピード発送</label>
             <label class="checkbox-label"><input type="checkbox" id="optDiscount" onchange="generateText()"> 🤝 まとめ買いでお値引き可能</label>
             <label class="checkbox-label"><input type="checkbox" id="optNoDiscount" onchange="generateText()"> 🙅‍♂️ 送料込み限界価格のためお値下げ不可</label>
+        </div>
+
+        <hr style="border:0; border-top:1px dashed #e5e7eb; margin: 16px 0;">
+
+        <!-- 3-2: 自分だけのMy定型文オプション -->
+        <div class="section-subtitle">⭐ 独自のMy定型文を追加</div>
+        <p style="font-size:0.78rem; color:#6b7280; margin-bottom:10px;">追加した文章はチェックボックスになり、チェックを入れると「4. 完成文」に自動追加されます！</p>
+
+        <div class="my-option-input-group">
+            <input type="text" id="customOptionInput" placeholder="例：〇〇駅付近での手渡しも対応可能です！">
+            <button class="btn-add-option" onclick="addCustomOption()">追加</button>
+        </div>
+
+        <div id="customOptionList" class="checkbox-group">
+            <!-- JavaScriptで動的に生成 -->
         </div>
     </div>
 
@@ -480,7 +483,7 @@
         <button id="copyBtn" class="btn-copy" onclick="copyResult()">📋 商品説明文をコピーする</button>
     </div>
 
-    <!-- 即レス用：コメント返信（お断り）ジェネレーター -->
+    <!-- 即レス用：コメント返信テンプレート -->
     <div class="card">
         <div class="card-title">💬 困ったときのコメント返信テンプレート</div>
         <p style="font-size:0.8rem; color:#6b7280; margin-bottom:10px;">タップすると返信文がコピーされます。メルカリのコメント欄に貼り付けて使ってください！</p>
@@ -489,17 +492,6 @@
             <span class="sub-tool-btn" onclick="copyReply('declineKeep')">📌 取り置き（専用）を断る</span>
             <span class="sub-tool-btn" onclick="copyReply('thanksPurchase')">🌸 購入後のお礼メッセージ</span>
         </div>
-    </div>
-
-    <!-- 新機能：My定型文保存（下部に移動＆ワンタップコピー化） -->
-    <div class="card">
-        <div class="card-title">⭐ My定型文（よく使うフレーズを保存）</div>
-        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:10px;">自分専用の文章を保存しておけます。「コピー」ボタンでいつでもワンタップコピペ可能です！</p>
-        <div class="my-template-area">
-            <input type="text" id="customPhrase" placeholder="例：〇〇駅付近での手渡しも可能です！">
-            <button class="btn-save" onclick="saveCustomPhrase()">保存</button>
-        </div>
-        <div id="savedList" class="saved-list"></div>
     </div>
 
     <!-- Step 5: SNSで共有 -->
@@ -513,7 +505,7 @@
         </div>
     </div>
 
-    <!-- SEO対策用ノウハウコンテンツ -->
+    <!-- SEO対策用ガイド -->
     <div class="card seo-content">
         <div class="card-title">💡 メルカリで商品が即売れするノウハウガイド</div>
         <h2>1. 検索されやすいキーワードをタイトルに含める</h2>
@@ -532,7 +524,8 @@
 
 <script>
     let currentCategory = 'fashion';
-    let savedPhrases = [];
+    // 各オブジェクト: { text: '文章', checked: true/false }
+    let customOptions = [];
 
     const placeholders = {
         fashion: {
@@ -559,15 +552,19 @@
         thanksPurchase: "ご購入いただき誠にありがとうございます！お取引完了まで迅速・丁寧な対応を心がけます。発送が完了いたしましたら改めてご連絡させていただきますので、今しばらくお待ちくださいませ。"
     };
 
-    // 初期化時にLocalStorageからデータを確実に取得
-    function loadSavedPhrases() {
+    /* LocalStorage から保存済みカスタムオプションを取得 */
+    function loadCustomOptions() {
         try {
-            const data = localStorage.getItem('my_mercari_phrases');
-            savedPhrases = data ? JSON.parse(data) : [];
+            const data = localStorage.getItem('my_mercari_custom_options');
+            customOptions = data ? JSON.parse(data) : [];
         } catch (e) {
-            savedPhrases = [];
+            customOptions = [];
         }
-        renderSavedPhrases();
+        renderCustomOptions();
+    }
+
+    function saveCustomOptionsToStorage() {
+        localStorage.setItem('my_mercari_custom_options', JSON.stringify(customOptions));
     }
 
     function setCategory(cat) {
@@ -616,6 +613,13 @@
         if (optDiscount) text += `・他出品物とのまとめ買いでお値引き可能です\n`;
         if (optNoDiscount) text += `・送料込み限界価格のため、お値下げ交渉はご遠慮ください\n`;
 
+        // My定型文（チェックされているものを反映）
+        customOptions.forEach(opt => {
+            if (opt.checked) {
+                text += `・${opt.text}\n`;
+            }
+        });
+
         text += `\n気になる点がありましたら、お気軽にコメントください！\nよろしくお願いいたします。`;
 
         const textarea = document.getElementById('resultText');
@@ -631,49 +635,55 @@
         }
     }
 
-    /* LocalStorage 保存＆表示処理 */
-    function saveCustomPhrase() {
-        const input = document.getElementById('customPhrase');
+    /* My定型文（3-2）の操作処理 */
+    function addCustomOption() {
+        const input = document.getElementById('customOptionInput');
         const val = input.value.trim();
         if (!val) return;
 
-        savedPhrases.push(val);
-        localStorage.setItem('my_mercari_phrases', JSON.stringify(savedPhrases));
+        customOptions.push({ text: val, checked: true });
+        saveCustomOptionsToStorage();
         input.value = '';
-        renderSavedPhrases();
-        showToast('My定型文に保存しました！');
+        renderCustomOptions();
+        generateText();
+        showToast('定型文を追加しました！');
     }
 
-    function deleteCustomPhrase(index) {
-        savedPhrases.splice(index, 1);
-        localStorage.setItem('my_mercari_phrases', JSON.stringify(savedPhrases));
-        renderSavedPhrases();
+    function toggleCustomOption(index) {
+        customOptions[index].checked = !customOptions[index].checked;
+        saveCustomOptionsToStorage();
+        generateText();
+    }
+
+    function deleteCustomOption(index) {
+        customOptions.splice(index, 1);
+        saveCustomOptionsToStorage();
+        renderCustomOptions();
+        generateText();
         showToast('削除しました');
     }
 
-    function copyCustomPhrase(text) {
-        navigator.clipboard.writeText(text);
-        showToast('定型文をコピーしました！');
-    }
-
-    function renderSavedPhrases() {
-        const container = document.getElementById('savedList');
+    function renderCustomOptions() {
+        const container = document.getElementById('customOptionList');
         container.innerHTML = '';
 
-        if (savedPhrases.length === 0) {
-            container.innerHTML = '<p style="font-size:0.8rem; color:#9ca3af; text-align:center; padding:8px;">保存された定型文はありません</p>';
+        if (customOptions.length === 0) {
+            container.innerHTML = '<p style="font-size:0.75rem; color:#9ca3af; text-align:center;">（追加したMy定型文がここに表示されます）</p>';
             return;
         }
 
-        savedPhrases.forEach((phrase, i) => {
+        customOptions.forEach((opt, i) => {
             const item = document.createElement('div');
-            item.className = 'saved-item';
+            item.className = 'my-option-item';
+            
+            const isChecked = opt.checked ? 'checked' : '';
+            
             item.innerHTML = `
-                <span class="saved-text">${escapeHtml(phrase)}</span>
-                <div class="saved-actions">
-                    <button class="btn-mini-copy" onclick="copyCustomPhrase('${escapeJs(phrase)}')">コピー</button>
-                    <button class="btn-mini-del" onclick="deleteCustomPhrase(${i})">削除</button>
-                </div>
+                <label class="checkbox-label">
+                    <input type="checkbox" ${isChecked} onchange="toggleCustomOption(${i})">
+                    <span>・${escapeHtml(opt.text)}</span>
+                </label>
+                <button class="btn-del-mini" onclick="deleteCustomOption(${i})" title="削除">✖</button>
             `;
             container.appendChild(item);
         });
@@ -681,10 +691,6 @@
 
     function escapeHtml(str) {
         return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-
-    function escapeJs(str) {
-        return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
     }
 
     function copyResult() {
@@ -743,11 +749,11 @@
     // 初期起動およびブラウザバック対応
     window.addEventListener('DOMContentLoaded', () => {
         setCategory('fashion');
-        loadSavedPhrases();
+        loadCustomOptions();
     });
 
     window.addEventListener('pageshow', (event) => {
-        loadSavedPhrases();
+        loadCustomOptions();
     });
 </script>
 
